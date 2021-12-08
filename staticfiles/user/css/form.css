@@ -1,0 +1,29 @@
+form.form input {
+    display: block;
+    width: 100%;
+}
+
+textarea {
+    width: 100%;
+}
+
+form.form {
+    width: 300px;
+    margin: 0 auto 100px;
+    border: 2px solid #bfbfbf;
+	border-radius: 8px;
+	padding: 45px 25px;
+	box-shadow: 1px 1px 5px 2px rgba(0,0,0,.175),
+				-1px -1px 5px 2px rgba(0,0,0,.175);
+}
+
+.blue-link {
+    color: blue;
+    text-decoration: underline;
+}
+
+@media screen and (max-width: 580px) {
+    form.form {
+        width: 100%;
+    }
+}

@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}Believe - Profile{% endblock title %}
+{% block current-page %}Profile{% endblock current-page %}
+{% block content %}
+    <div class="container">
+
+        <div class="center">
+            {% if request.user == user %}
+                <a href="{% url 'user:edit' user.id %}">Edit</a>
+            {% endif %}
+            <img src="{{ profile.pic.url }}" alt="profile image" class="circle-img">
+            <p>Username: {{ user.username }}</p>
+            <p>Firstname: {{ user.first_name }}</p>
+            <p>Lastname: {{ user.last_name }}</p>
+            <p>Email Address: {{ user.email }}</p>
+            <p>Social Link: <a href="{{ profile.social_link }}" target="_blank">{{ profile.social_link }}</a></p>
+            <p>Bio: {{ profile.bio }}</p>
+            <p>Role: {{ profile.role }}</p>
+        </div>
+    </div>
+{% endblock content %}

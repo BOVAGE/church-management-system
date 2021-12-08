@@ -1,0 +1,118 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}Believe - Home {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <section class="two-cols-container">
+        <div class="blog-posts">
+            {% for post in page_obj %}
+            <div class="blog-post">
+                <div class="img-container">
+                    <img src="{{ post.post_image.url }}" alt="church light bulb">
+                    <div class="date">
+                        <p class="day">{{ post.date_created|date:"d" }}</p>
+                        <p class="date-text">{{ post.date_created|date:"N, Y" }}</p>
+                    </div>
+                </div>
+
+                <div class="heading">
+                    <h2>{{ post.title }}</h2>
+                    <p class="subtitle">
+                        By <a href="{% url 'user:profile' post.author.id %}">{{ post.author.first_name|title }} {{ post.author.last_name|title }}</a>| In {{ post.category }} | {{ post.comment_set.count }}
+                        Comments
+                    </p>
+                </div>
+
+                <div>
+                    {{ post.description|safe }}
+                </div>
+
+                <a href="{% url 'blog:detail' post.title %}" class="read-more">Read More</a>
+            </div>
+
+            {% endfor %}
+            <!-- pagination section -->
+            <div class="pagination">
+                {% for page_number in page_obj.paginator.page_range %}
+                    {% if page_obj.number == page_number %}
+                        <a href="?page={{ page_number }}" class="current-page page-link">{{forloop.counter|stringformat:"02d"}}</a>
+                    {% else %}
+                    <a href="?page={{ page_number }}" class="page-link">{{forloop.counter|stringformat:"02d" }}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+
+        </div>
+
+        <aside>
+
+            <h2>Latest Sermons</h2>
+
+            <div class="side-post">
+                <img src="{% static 'blog/images/latest_1.jpg' %}" alt="pray">
+                <div>
+                    <time datetime="2018-03-06">06 March, 2021</time>
+                    <p>How to pray the right way</p>
+                </div>
+            </div>
+
+            <div class="side-post">
+                <img src="{% static 'blog/images/latest_2.jpg' %}" alt="Bible">
+                <div>
+                    <time datetime="2018-03-06">06 March, 2021</time>
+                    <p>How to pray the right way</p>
+                </div>
+            </div>
+
+            <div class="side-post">
+                <img src="{% static 'blog/images/latest_3.jpg' %}" alt="narrow church">
+                <div>
+                    <time datetime="2018-03-06">06 March, 2021</time>
+                    <p>How to pray the right way</p>
+                </div>
+            </div>
+
+            <div class="side-post">
+                <img src="{% static 'blog/images/latest_4.jpg' %}" alt="youth">
+                <div>
+                    <time datetime="2018-03-06">06 March, 2021</time>
+                    <p>How to pray the right way</p>
+                </div>
+            </div>
+
+            <!-- categories section -->
+            <div class="categories">
+                <h2>Categories</h2>
+                {% for category in all_categories %}
+                <div class="category">
+                    <p>{{ category.category_name }}</p>
+                    <p>{{ category.post_set.count }}</p>
+                </div>
+                {% endfor %}
+            </div>
+
+            <div class="archives">
+                <h2>Archives</h2>
+                <p>November 2021</p>
+                <p>December 2021</p>
+                <p>January 2021</p>
+                <p>February 2021</p>
+                <p>March 2021</p>
+            </div>
+
+            <blockquote>
+                <img src="{% static 'blog/images/quote_char.png' %}" alt="quote symbol">
+                <p>
+                    4 One thing I ask from the LORD, this only
+                    do I seek: that I may dwell in the house of
+                    the LORD all the days of my life, to gaze on the
+                    beauty of the LORD and to seek him in his temple.
+                </p>
+
+                <span class="bible-ref">Psalm 27:4</span>
+            </blockquote>
+        </aside>
+    </section>
+</div>
+{% endblock content %}

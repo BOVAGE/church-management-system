@@ -1,0 +1,24 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}Believe - Login{% endblock title %}
+{% block style %}<link rel = "stylesheet" href = "{% static 'user/css/form.css' %}" type = "text/css">{% endblock style %}
+{% block current-page %}Login{% endblock current-page %}
+{% block content %}
+    <div class="container">
+        <div class="margin-container">
+            <form action="{% url 'user:login' %}" method="post" class="form">
+                {% csrf_token %}
+                {% for err in form.non_field_errors %}
+                    <p class="error-text">{{ err }}</p>
+                {% endfor %}
+                <label for="id_username">{{ form.username.label }}</label>
+                {{ form.username }} 
+                <label for="id_password">{{ form.password.label }}</label>
+                {{ form.password }}
+                <input type="submit" value="Login" class="action">
+                <input type="hidden" name="next" value="{{ request.GET.next }}"/>
+                <p>Not a member?<a class="blue-link" href="{% url 'user:register' %}">Register</a></p>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

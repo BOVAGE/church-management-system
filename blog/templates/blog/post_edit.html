@@ -1,0 +1,14 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}Believe - Edit Post{% endblock title %}
+{% block current-page %}Post/Edit{% endblock current-page %}
+{% block content %}
+    <div class="container">
+        <form action="" method="post" enctype="multipart/form-data" class="center">
+            {% csrf_token %}
+            {{ form.media }}
+            {{ form.as_p }}
+            <input type="submit" value="Publish">
+        </form>
+    </div>
+{% endblock content %}

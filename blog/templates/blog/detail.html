@@ -1,0 +1,57 @@
+{% extends 'blog/base.html' %}
+{% load static %}
+{% block title %}{{ post.title }}{% endblock title %}
+{% block current-page %}Blog{% endblock current-page %}
+{% block content %}
+<div class="container">
+    <div class="detail-post">
+        <div class="img-container">
+            <img src="{{ post.post_image.url }}" alt="church light bulb" class="detail-post-img">
+            <div class="date">
+                <p class="day">{{ post.date_created|date:"d" }}</p>
+                <p class="date-text">{{ post.date_created|date:"N, Y" }}</p>
+            </div>
+        </div>
+
+        <div class="heading">
+            <h2>{{ post.title }}</h2>
+            <p class="subtitle">
+                By <a href="{% url 'user:profile' post.author.id %}">{{ post.author.first_name|title }} {{ post.author.last_name|title }}</a> | In {{ post.category }} | {{ post.comment_set.count }} Comments
+                {% if request.user == post.author %}
+                |<a href="{% url 'blog:edit' post.title %}">Edit</a>
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="body">
+            {{ post.body|safe }}
+        </div>
+
+        <div class="comments" id="comments">
+            {% if comments %}
+            {% for comment in comments %}
+            <div class="comment">
+                <div class="comment-details">
+                    <a href="{% url 'user:profile' comment.user.id %}"><img src="{{ comment.user.profile.pic.url }}"
+                            class="circle-img"></a>
+                    <p>{{ comment.user.username|title }}<br>{{ comment.user.profile.bio }}</p>
+                    <p class="comment-date">{{ comment.date_created }}</p>
+                </div>
+                {{ comment.comment_text }}
+            </div>
+            {% endfor %}
+            {% else %}
+            <p>There is no comment yet.</p>
+            {% endif %}
+        </div>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <label for="id_comment_text">Comment</label>
+            {{ form.comment_text }}
+            <input type="submit" class="action" value="Post">
+        </form>
+
+    </div>
+</div>
+{% endblock content %}
