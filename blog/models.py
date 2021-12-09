@@ -20,7 +20,7 @@ class Post(models.Model):
     description = models.CharField(max_length=1000)
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
-    post_image = models.ImageField()
+    post_image = models.ImageField(upload_to="media/")
     body = RichTextField()
     #body = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)

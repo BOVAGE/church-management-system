@@ -12,6 +12,8 @@ gunicorn = "*"
 whitenoise = "*"
 dj-database-url = "*"
 python-decouple = "*"
+django-storages = "*"
+boto3 = "*"
 
 [dev-packages]
 
