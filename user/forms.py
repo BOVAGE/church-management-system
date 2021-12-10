@@ -13,6 +13,19 @@ class UserCreationForm(forms.ModelForm):
             'username': None
         }
 
+    def clean_first_name(self):
+        first_name = self.cleaned_data['first_name']
+        if first_name.strip() == '':
+            raise forms.ValidationError("First name is required")
+        return first_name
+
+    def clean_last_name(self):
+        last_name = self.cleaned_data['last_name']
+        if last_name.strip() == '':
+            raise forms.ValidationError("Last name is required")
+        return last_name
+
+
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
         password2 = self.cleaned_data.get('password2')
