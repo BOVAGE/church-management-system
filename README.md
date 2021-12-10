@@ -15,6 +15,9 @@ This is a church management website created with Django.
 # Database
 Postgresql
 
+# Tools used
+- AWS for serving static files & file upload
+
 # Todos
 - search
 - Sermon
