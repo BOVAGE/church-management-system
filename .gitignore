@@ -1,3 +1,5 @@
 church/.env
-static
+staticfiles
 media
+pipfile
+pipfile.lock
