@@ -1,4 +1,4 @@
-church/.env
+.env
 staticfiles
 media
 pipfile
