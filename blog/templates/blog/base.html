@@ -24,6 +24,7 @@
 					{% if announcement %}
 						<p class = "yellow-text">
 							{{ announcement.event_name }}: 
+						</p>
 						<div class = "time">
 							<p id="days">
 								<span class = "units">Days</span>
@@ -38,6 +39,10 @@
 								<span class = "units">Seconds</span>
 							</p>
 						</div>
+					{% else %}
+						<p class = "yellow-text">
+							No Upcoming Event.
+						</p>
 					{% endif %}
 					<a href = "#" class = "btn">Send Donations</a>
 				</div>
