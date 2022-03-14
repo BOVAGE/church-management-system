@@ -9,7 +9,11 @@ from django.contrib import messages
 
 # Create your views here.
 def index(request):
-    all_posts = Post.objects.all()
+    category = request.GET.get('category')
+    if category == None:
+        all_posts = Post.objects.all()
+    else:
+        all_posts = Post.objects.filter(category__category_name=category)
     paginator = Paginator(all_posts, 3) # Show 3 posts per page.
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)

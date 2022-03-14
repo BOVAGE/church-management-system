@@ -86,7 +86,7 @@
                 <h2>Categories</h2>
                 {% for category in all_categories %}
                 <div class="category">
-                    <p>{{ category.category_name }}</p>
+                    <p><a href="{% url 'blog:index' %}?category={{ category.category_name }}">{{ category.category_name }}</a></p>
                     <p>{{ category.post_set.count }}</p>
                 </div>
                 {% endfor %}
