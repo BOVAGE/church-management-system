@@ -22,12 +22,15 @@ function countdown() {
 	let hours = Math.floor(totalSeconds / 3600) % 24;
 	let minutes = Math.floor(totalSeconds / 60) % 60;
 	let seconds = Math.floor(totalSeconds) % 60;
-	
-	console.log(days, hours, minutes, seconds);
 	DAYS.innerHTML = days + ` <span class = "units">Days</span>`;
 	HOURS.innerHTML = formatTime(hours) + ` <span class = "units">Hours</span>`;
 	MINS.innerHTML = formatTime(minutes) + ` <span class = "units">Minutes</span>`;
 	SECS.innerHTML = formatTime(seconds) + ` <span class = "units">Seconds</span>`;
+	setTimeout(() => {
+		countdown();
+	}, 1000);
 }
 
-setInterval(countdown, 1000);
+if (date != false) {
+	countdown();
+}
