@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -7,6 +8,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
+from . import newsletter 
 
 
 # Create your views here.
@@ -89,6 +91,16 @@ def delete_post(request, title):
     post.delete()
     messages.success(request, f'Post: {post.title} deleted successfully')
     return HttpResponseRedirect(reverse('blog:index'))
+
+def subscribe(request):
+    if request.method == 'POST':
+        email = request.POST['Nemail']
+        response = newsletter.subscribe(email)
+        if response == 'added':
+            messages.success(request, 'You have been added to our Newsletter plan.')
+        else:
+            messages.error(request, 'An error occurred while adding your email.')
+        return HttpResponseRedirect(reverse('blog:index'))
 
 def error_404(request, exception):
     return render(request, 'blog/404.html')

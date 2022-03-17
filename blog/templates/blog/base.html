@@ -107,7 +107,8 @@
                         Subscribe to our newsletter
                     </p>
                     
-                    <form id = "newsletter" action = "#" method = "post">
+                    <form id = "newsletter" action = "{% url 'blog:subscribe' %}" method = "post">
+						{% csrf_token %}
                         <input class = "newsemail" type = "email" name = "Nemail" placeholder = "Your email" required>
                         <input class = "subscribe action" type = "submit" value = "Subscribe">
                     </form>
