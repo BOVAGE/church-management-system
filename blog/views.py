@@ -44,7 +44,7 @@ def detail(request, title):
             instance.user = request.user
             instance.post = post
             instance.save()
-            return HttpResponseRedirect(reverse('blog:detail', args =(post.title)))
+            return HttpResponseRedirect(reverse('blog:detail', args =(post.title,)))
     context = {'post': post, 'form': form, 'comments': comments}
     return render(request, 'blog/detail.html', context)
 
@@ -59,7 +59,7 @@ def create_post(request):
             instance.author = request.user
             instance.save()
             messages.success(request, "Post Created Successfully.")
-            return HttpResponseRedirect(reverse('blog:detail', args =(post.title)))
+            return HttpResponseRedirect(reverse('blog:detail', args =(instance.title,)))
         else:
             messages.error(request, "Error Creating the Post.")
     context = {'form': form}
@@ -76,7 +76,7 @@ def edit_post(request, title):
         if form.is_valid():
             form.save()
             messages.success(request, "Post Edited Successfully.")
-            return HttpResponseRedirect(reverse('blog:detail', args =(post.title)))
+            return HttpResponseRedirect(reverse('blog:detail', args =(post.title,)))
         else:
             messages.error(request, "Error Editing the Post.")
     context = {'form': form}
