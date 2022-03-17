@@ -1,4 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from .models import Post, Category, Comment
 from .forms import CommentForm, PostForm
 from django.core.paginator import Paginator
@@ -42,7 +44,7 @@ def detail(request, title):
             instance.user = request.user
             instance.post = post
             instance.save()
-            return redirect('blog:detail', title= post.title)
+            return HttpResponseRedirect(reverse('blog:detail', args =(post.title)))
     context = {'post': post, 'form': form, 'comments': comments}
     return render(request, 'blog/detail.html', context)
 
@@ -57,7 +59,7 @@ def create_post(request):
             instance.author = request.user
             instance.save()
             messages.success(request, "Post Created Successfully.")
-            return redirect('blog:detail', title=instance.title)
+            return HttpResponseRedirect(reverse('blog:detail', args =(post.title)))
         else:
             messages.error(request, "Error Creating the Post.")
     context = {'form': form}
@@ -74,11 +76,19 @@ def edit_post(request, title):
         if form.is_valid():
             form.save()
             messages.success(request, "Post Edited Successfully.")
-            return redirect('blog:detail', title=post.title)
+            return HttpResponseRedirect(reverse('blog:detail', args =(post.title)))
         else:
             messages.error(request, "Error Editing the Post.")
     context = {'form': form}
-    return render(request, 'blog/post_edit.html', context)    
+    return render(request, 'blog/post_edit.html', context)
+
+def delete_post(request, title):
+    post = get_object_or_404(Post, title=title)
+    if request.user != post.author:
+        raise PermissionDenied()
+    post.delete()
+    messages.success(request, f'Post: {post.title} deleted successfully')
+    return HttpResponseRedirect(reverse('blog:index'))
 
 def error_404(request, exception):
     return render(request, 'blog/404.html')
