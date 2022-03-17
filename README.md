@@ -2,15 +2,15 @@
 This is a church management website created with Django.
 
 # Features
-- Authentication & Permission
-- fully functional blog section
-- Rich Text Editor for writing blog post
-- Profile for members
-- Announcement of events
-- countdown of the earliest event
-- custom error pages 
-- image upload
-- One Time notification
+- [x] Authentication & Permission
+- [x] fully functional blog section
+- [x] Rich Text Editor for writing blog post
+- [x] Profile for members
+- [x] Announcement of events
+- [x] countdown of the earliest event
+- [x] custom error pages 
+- [x] image upload
+- [x] One Time notification
 
 # Database
 Postgresql
@@ -19,9 +19,9 @@ Postgresql
 - AWS for serving static files & file upload
 
 # Todos
-- search
-- Sermon
-- daily bible verse on home page
-- generate pdf file of sermon based on request
-- newsletter
-- integrating paystack for donations
+- [ ] search
+- [ ] Sermon
+- [ ] daily bible verse on home page
+- [ ] generate pdf file of sermon based on request
+- [ ] newsletter
+- [ ] integrating paystack for donations
