@@ -36,9 +36,17 @@
             <div class="pagination">
                 {% for page_number in page_obj.paginator.page_range %}
                     {% if page_obj.number == page_number %}
-                        <a href="?page={{ page_number }}" class="current-page page-link">{{forloop.counter|stringformat:"02d"}}</a>
+                        {% if category %}
+                            <a href="?category={{ category }}&page={{ page_number }}" class="current-page page-link">{{forloop.counter|stringformat:"02d"}}</a>
+                        {% else %}
+                            <a href="?page={{ page_number }}" class="current-page page-link">{{forloop.counter|stringformat:"02d"}}</a>
+                        {% endif %}
                     {% else %}
-                    <a href="?page={{ page_number }}" class="page-link">{{forloop.counter|stringformat:"02d" }}</a>
+                        {% if category %}
+                            <a href="?category={{ category }}&page={{ page_number }}" class="page-link">{{forloop.counter|stringformat:"02d" }}</a>
+                        {% else %}
+                            <a href="?page={{ page_number }}" class="page-link">{{forloop.counter|stringformat:"02d" }}</a>
+                        {% endif %}
                     {% endif %}
                 {% endfor %}
             </div>

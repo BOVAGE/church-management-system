@@ -13,8 +13,8 @@ from . import newsletter
 
 # Create your views here.
 def index(request):
-    category = request.GET.get('category')
-    if category == None:
+    category = request.GET.get('category','')
+    if not category:
         all_posts = Post.objects.all()
     else:
         all_posts = Post.objects.filter(category__category_name=category)
@@ -22,7 +22,7 @@ def index(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     all_categories = Category.objects.all()
-    context = {'all_posts': all_posts, 'all_categories': all_categories, 'page_obj': page_obj}
+    context = {'all_posts': all_posts, 'all_categories': all_categories, 'page_obj': page_obj, 'category': category}
     return render(request, 'blog/index.html', context)
 
 def about(request):
