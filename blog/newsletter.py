@@ -4,10 +4,15 @@ from decouple import config
 import hashlib
 import json
 
-list_id = 'a8eb3204d1'
 
 class Newsletter:
-    """ newsletter class using mailchimp """
+    """ 
+        newsletter class using mailchimp.
+
+        Read mailchimp docs to know the required
+        fields in member_info so as to know the 
+        keyword arguments to use. 
+    """
 
     @staticmethod
     def get_email_hash(email):
@@ -36,6 +41,12 @@ class Newsletter:
     def __str__(self):
         """ string representation of the newsletter object """
         return f"Newsletter object for {self.list_id}"
+    
+    def __eq__(self, other_object):
+        """ compares  two newsletter objects """
+        if isinstance(other_object, Newsletter):
+            return self.list_id == other_object.list_id
+        return False
 
     def add_member(self, **member_info):
         """ adds member to the audience list with the member_info"""
@@ -80,3 +91,7 @@ class Newsletter:
     def unsubscribe(self, member_email_hash):
         """ change a specific member status to unsubscribed """
         return self.update_contact(member_email_hash, status='unsubscribed')
+
+
+list_id = 'a8eb3204d1'
+newsletter = Newsletter(list_id)
