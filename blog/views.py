@@ -8,7 +8,7 @@ from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
-from . import newsletter 
+from .newsletter import newsletter 
 
 
 # Create your views here.
@@ -95,11 +95,13 @@ def delete_post(request, title):
 def subscribe(request):
     if request.method == 'POST':
         email = request.POST['Nemail']
-        response = newsletter.subscribe(email)
+        response = newsletter.add_member(email_address=email, status='subscribed')
         if response == 'added':
             messages.success(request, 'You have been added to our Newsletter plan.')
+        elif response == 'Member Exists':
+            messages.error(request, f'{email} already exists in our newsletter')
         else:
-            messages.error(request, 'An error occurred while adding your email.')
+            messages.error(request, 'An error occured!')
         return HttpResponseRedirect(reverse('blog:index'))
 
 def error_404(request, exception):
