@@ -25,3 +25,4 @@ Postgresql
 - [ ] generate pdf file of sermon based on request
 - [ ] newsletter
 - [ ] integrating paystack for donations
+- [ ] customized admin dashboard
