@@ -18,8 +18,8 @@
             <p class="subtitle">
                 By <a href="{% url 'user:profile' post.author.id %}">{{ post.author.first_name|title }} {{ post.author.last_name|title }}</a> | In {{ post.category }} | {{ post.comment_set.count }} Comments
                 {% if request.user == post.author %}
-                |<a href="{% url 'blog:edit' post.title %}">Edit</a>
-                |<a href="{% url 'blog:delete' post.title %}"><i class="fas fa-trash"></i></i></a>
+                |<a href="{% url 'blog:edit' post.id post.slug %}">Edit</a>
+                |<a href="{% url 'blog:delete' post.id post.slug %}"><i class="fas fa-trash"></i></i></a>
                 {% endif %}
             </p>
         </div>

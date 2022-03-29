@@ -28,8 +28,8 @@ def index(request):
 def about(request):
     return render(request, 'blog/about.html')
 
-def detail(request, title):
-    post = get_object_or_404(Post, title=title)
+def detail(request, id, slug):
+    post = get_object_or_404(Post, id=id, slug=slug)
     comments = post.comment_set.all()
     if request.method != 'POST':
         form = CommentForm()
@@ -46,7 +46,7 @@ def detail(request, title):
             instance.user = request.user
             instance.post = post
             instance.save()
-            return HttpResponseRedirect(reverse('blog:detail', args =(post.title,)))
+            return HttpResponseRedirect(reverse('blog:detail', args =(post.id,post.slug)))
     context = {'post': post, 'form': form, 'comments': comments}
     return render(request, 'blog/detail.html', context)
 
@@ -61,14 +61,14 @@ def create_post(request):
             instance.author = request.user
             instance.save()
             messages.success(request, "Post Created Successfully.")
-            return HttpResponseRedirect(reverse('blog:detail', args =(instance.title,)))
+            return HttpResponseRedirect(reverse('blog:detail', args =(instance.id, instance.slug)))
         else:
             messages.error(request, "Error Creating the Post.")
     context = {'form': form}
     return render(request, 'blog/post_new.html', context)
 
-def edit_post(request, title):
-    post = get_object_or_404(Post, title=title)
+def edit_post(request, id, slug):
+    post = get_object_or_404(Post, id=id, slug=slug)
     if request.user != post.author:
         raise PermissionDenied()
     if request.method != 'POST':
@@ -78,14 +78,14 @@ def edit_post(request, title):
         if form.is_valid():
             form.save()
             messages.success(request, "Post Edited Successfully.")
-            return HttpResponseRedirect(reverse('blog:detail', args =(post.title,)))
+            return HttpResponseRedirect(reverse('blog:detail', args =(post.id,post.slug)))
         else:
             messages.error(request, "Error Editing the Post.")
     context = {'form': form}
     return render(request, 'blog/post_edit.html', context)
 
-def delete_post(request, title):
-    post = get_object_or_404(Post, title=title)
+def delete_post(request, id, slug):
+    post = get_object_or_404(Post, id=id, slug=slug)
     if request.user != post.author:
         raise PermissionDenied()
     post.delete()

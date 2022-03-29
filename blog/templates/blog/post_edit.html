@@ -12,3 +12,16 @@
         </form>
     </div>
 {% endblock content %}
+
+{% block js %}
+    <script src="{% static 'admin/js/vendor/xregexp/xregexp.min.js' %}"></script>
+    <script src="{% static 'admin/js/urlify.js' %}"></script>
+    <script>
+        slug = $('#id_slug');
+        title = $('#id_title');
+
+        title.keyup(function(){
+            slug.val(URLify(title.val(), 50, true));
+        });
+    </script>
+{% endblock js %}
