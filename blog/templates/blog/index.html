@@ -28,7 +28,7 @@
                     {{ post.description|safe }}
                 </div>
 
-                <a href="{% url 'blog:detail' post.id post.slug %}" class="read-more">Read More</a>
+                <a href="{{ post.get_absolute_url }}" class="read-more">Read More</a>
             </div>
 
             {% endfor %}
