@@ -48,13 +48,26 @@ class Newsletter:
             return self.list_id == other_object.list_id
         return False
 
-    def add_member(self, **member_info):
-        """ adds member to the audience list with the member_info"""
+    def add_member(self, is_exist_subscribe: bool=True, **member_info):
+        """ 
+            adds member to the audience list with the member_info.
+
+            is_exist_subscribe determines whether user whose email_address
+            already exist in the list should be updated to change their status to
+            subscribed. This is useful as users who have unsubscribed might want
+            to subscribe back. Moreso, when a user unsubsribed their email_address
+            isn't removed from the list only their status is changed. 
+            More info on mailchimp docs as regards status and removing members.
+        """
         try:
             response = self.mailchimp.lists.add_list_member(self.list_id, member_info)
             return 'added'
         except ApiClientError as error:
+            response = self.get_member_info(self.get_email_hash(member_info['email_address']))
             error = Newsletter.serialize_error(error)
+            if error['title'] == 'Member Exists' and response['status'] == 'unsubscribed':
+                if is_exist_subscribe:
+                    return self.subscribe(response['contact_id'])
             return error['title']
 
     def get_all_members(self):
