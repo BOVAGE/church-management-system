@@ -1,6 +1,6 @@
 import re
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
 from .models import Post, Category, Comment
 from .forms import CommentForm, PostForm
@@ -96,13 +96,19 @@ def subscribe(request):
     if request.method == 'POST':
         email = request.POST['Nemail']
         response = newsletter.add_member(email_address=email, status='subscribed')
-        if response == 'added':
+        if response == 'added' or response == 'updated':
             messages.success(request, 'You have been added to our Newsletter plan.')
         elif response == 'Member Exists':
             messages.error(request, f'{email} already exists in our newsletter')
         else:
             messages.error(request, 'An error occured!')
         return HttpResponseRedirect(reverse('blog:index'))
+
+def unsubscribe(request, email_hash):
+    response = newsletter.unsubscribe(email_hash)
+    if response == 'updated':
+        return HttpResponse('You have been unsubscribed from our newsletter!')
+    return JsonResponse(response, safe=False)
 
 def error_404(request, exception):
     return render(request, 'blog/404.html')
