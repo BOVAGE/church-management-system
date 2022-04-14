@@ -29,7 +29,6 @@
         </div>
 
         <div class="comments" id="comments">
-            {% if comments %}
             {% for comment in comments %}
             <div class="comment">
                 <div class="comment-details">
@@ -40,10 +39,9 @@
                 </div>
                 {{ comment.comment_text }}
             </div>
-            {% endfor %}
-            {% else %}
+            {% empty %}
             <p>There is no comment yet.</p>
-            {% endif %}
+            {% endfor %}
         </div>
 
         <form action="" method="POST">
