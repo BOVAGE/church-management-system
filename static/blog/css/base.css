@@ -86,13 +86,21 @@ li.inner-list {
     align-items: center;
 }
 
-input {
+input, textarea {
 	border: 0;
 	margin-bottom: 10px;
 	background-color: #ededed;
 	padding-left: 30px;
 	font-style: italic;
 	height: 45px;
+}
+
+textarea {
+	margin-top: 20px;
+    width: 100%;
+    height: 150px;
+    padding-top: 20px;
+    resize: vertical;
 }
 
 input.action {

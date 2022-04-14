@@ -46,7 +46,7 @@
 
         <form action="" method="POST">
             {% csrf_token %}
-            <label for="id_comment_text">Comment</label>
+            <label for="id_comment_text">Comment:</label>
             {{ form.comment_text }}
             <input type="submit" class="action" value="Post">
         </form>
