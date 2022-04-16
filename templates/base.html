@@ -62,7 +62,7 @@
 					<input class = "search" type =  "search" name = "search" placeholder = "Search">
 					<a href = "{% url 'blog:index' %}">Home</a>
 					<a href = "{% url 'blog:about'%}">About</a>
-					<a href = "#">Sermon</a>
+					<a href = "{% url 'sermon:sermons' %}">Sermons</a>
 					{% if request.user.is_authenticated %}
 						<a href = "{% url 'user:log_out' %}">Logout</a>
 						<a href = "{% url 'user:profile' request.user.id %}">{{ request.user.username }}</a>
