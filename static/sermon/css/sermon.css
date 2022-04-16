@@ -1,0 +1,56 @@
+img {
+    max-width: 100%;
+}
+
+.two-equ-cols-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 15px;
+}
+
+.heading-subtitle {
+    font-family: 'Bilbo',serif;
+    font-size: 1rem;
+    margin-bottom: 30px;
+}
+
+.sermon-wrapper {
+    padding: 100px 0;
+}
+
+#today-sermon-wrapper {
+    background-color: #f0f4f8;
+    background-image:url('../images/sermon.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    border-bottom: 3px solid var(--red-text-bg);
+}
+
+.today-sermon-container {
+    margin: 0 var(--main-margin) 25px;
+}
+
+.sermon-details {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-between;
+    padding-left: 10px;
+}
+
+.sermon-actions {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: flex-end;
+}
+
+.sermon-actions img {
+    width: 30px;
+    height: 30px;
+    margin-right: 20px;
+}
+
+/* overidding base.css  */
+.showcase-container {
+    margin-bottom: 0;
+}

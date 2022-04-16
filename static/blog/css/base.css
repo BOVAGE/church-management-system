@@ -50,7 +50,6 @@ h3 {
 	display: inline-block;
 	font-size: 18px;
 	font-weight: normal;
-	border-bottom: 2px solid #eb4141;
 	margin-bottom: 30px;
 }
 
@@ -69,7 +68,6 @@ span.red-text {
 
 li {
 	color: #6b6b6b;
-	margin-bottom: 20px;
 }
 
 li > ul {
@@ -127,6 +125,14 @@ input:focus {
 
 .error-img {
 	width: 100%;
+}
+
+.description {
+	color: var(--grey-text);
+	font-size: 16px;
+	line-height: 1.5;
+	font-weight: 500;
+	font-family: 'Montserrat', sans-serif;
 }
 /* end general rules */
 
@@ -370,14 +376,6 @@ p.date-text {
 	margin-bottom: 100px;
 }
 
-.blog-post > p {
-	color: var(--grey-text);
-	font-size: 16px;
-	line-height: 1.5;
-	font-weight: 500;
-	font-family: 'Montserrat', sans-serif;
-}
-
 a.read-more {
 	font-style: italic;
 	font-size: 14px;
@@ -524,6 +522,10 @@ input.subscribe {
 	margin: 0 var(--main-margin);
 }
 
+.three-cols-container h3 {
+	border-bottom: 2px solid #eb4141;
+}
+
 .social-icons {
 	margin: 40px 0;
 }
@@ -555,6 +557,10 @@ h1.logo-name {
 .links-wrapper {
 	display: flex;
 	justify-content: space-between;
+}
+
+.links-wrapper li {
+	margin-bottom: 20px;
 }
 
 .links-wrapper a {

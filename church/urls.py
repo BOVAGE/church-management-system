@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('blog.urls')),
     path('user/', include('user.urls')),
+    path('sermon/', include('sermon.urls')),
 ]
 handler404 = 'blog.views.error_404'
 handler403 = 'blog.views.error_403'

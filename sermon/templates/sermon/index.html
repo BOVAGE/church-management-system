@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %} <link rel="stylesheet" href="{% static 'sermon/css/sermon.css' %}"> {% endblock style %}
+{% block title %}Believe - Sermons {% endblock title %}
+
+{% block content %}
+<section id="today-sermon-wrapper" class="sermon-wrapper">
+    <div class="container">
+        <div class="today-sermon-container">
+            <div class="center">
+                <img src="{% static 'sermon/images/church_3.png' %}" alt="Bible">
+                <h1>Today's Sermon</h1>
+                <p class="heading-subtitle">God loves us all</p>
+            </div>
+            {% with today_sermon as ts %}
+            <div class="two-equ-cols-container">
+                <div class="sermon-image">
+                    <img src="{{ ts.image.url }}" alt="sermon image">
+                </div>
+
+                <div class="sermon-details">
+                    <h3><a href="">{{ ts.title }}</a></h3>
+                    <div class="semon-info">
+                        <p>Sermon by: <span class="red-text">{{ ts.author.first_name }} {{ ts.author.last_name }}</span></p>
+                        <p>Tags: <span class="red-text">{{ ts.tags.all|join:", " }}</span></p>
+                        <p>Date: <span class="red-text">{{ ts.date_created|date:"l j F, Y"  }}</span></p>
+                    </div>
+
+                    <div class="description">
+                        {{ ts.summary }}
+                    </div>
+
+                    <ul class="sermon-actions">
+                        <li><img src="{% static 'sermon/images/sermon_1.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_2.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_3.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_4.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_5.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_6.svg' %}" alt=""></li>
+                    </ul>
+                </div>
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- popular sermons section  -->
+<section id="popular-sermon-wrapper" class="sermon-wrapper">
+    <div class="container">
+        <div class="today-sermon-container">
+            <div class="center">
+                <img src="{% static 'sermon/images/church_7.png' %}" alt="Bible">
+                <h1>Popular Sermons</h1>
+                <p class="heading-subtitle">God loves us all</p>
+            </div>
+
+            <div class="two-equ-cols-container">
+                <div class="sermon-details">
+                    <img src="{% static 'sermon/images/popular_1.jpg' %}" alt="sermon image">
+                    <h3>Receive The Holy Spirit By Jesus Christ</h3>
+                    <div class="semon-info">
+                        <p>Sermon by: <span class="red-text">Priest Jack Smith</span></p>
+                        <p>Tags: <span class="red-text">Jesus Christ, Holy</span></p>
+                        <p>Date: <span class="red-text">Monday 11 March, 2018</span></p>
+                    </div>
+
+                    <div class="description">
+                        Praesent malesuada congue magna at finibus. In hac habitasse platea dictumst. 
+                        Curabitur rhoncus auctor eleifend. Fusce venenatis diam urna, eu pharetra 
+                        arcu varius ac. Etiam cursus turpis lectus, id iaculis risus tempor id. 
+                        Phasellus fringilla nisl sed sem scelerisque, eget aliquam magna vehicula
+                        .nteger nec bibendum lacus.
+                    </div>
+
+                    <ul class="sermon-actions">
+                        <li><img src="{% static 'sermon/images/sermon_1.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_2.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_3.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_4.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_5.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_6.svg' %}" alt=""></li>
+                    </ul>
+                </div>
+
+                <div class="sermon-details">
+                    <img src="{% static 'sermon/images/popular_1.jpg' %}" alt="sermon image">
+                    <h3>Receive The Holy Spirit By Jesus Christ</h3>
+                    <div class="semon-info">
+                        <p>Sermon by: <span class="red-text">Priest Jack Smith</span></p>
+                        <p>Tags: <span class="red-text">Jesus Christ, Holy</span></p>
+                        <p>Date: <span class="red-text">Monday 11 March, 2018</span></p>
+                    </div>
+
+                    <div class="description">
+                        Praesent malesuada congue magna at finibus. In hac habitasse platea dictumst. 
+                        Curabitur rhoncus auctor eleifend. Fusce venenatis diam urna, eu pharetra 
+                        arcu varius ac. Etiam cursus turpis lectus, id iaculis risus tempor id. 
+                        Phasellus fringilla nisl sed sem scelerisque, eget aliquam magna vehicula
+                        .nteger nec bibendum lacus.
+                    </div>
+
+                    <ul class="sermon-actions">
+                        <li><img src="{% static 'sermon/images/sermon_1.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_2.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_3.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_4.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_5.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_6.svg' %}" alt=""></li>
+                    </ul>
+                </div>
+
+                <div class="sermon-details">
+                    <img src="{% static 'sermon/images/popular_1.jpg' %}" alt="sermon image">
+                    <h3>Receive The Holy Spirit By Jesus Christ</h3>
+                    <div class="semon-info">
+                        <p>Sermon by: <span class="red-text">Priest Jack Smith</span></p>
+                        <p>Tags: <span class="red-text">Jesus Christ, Holy</span></p>
+                        <p>Date: <span class="red-text">Monday 11 March, 2018</span></p>
+                    </div>
+
+                    <div class="description">
+                        Praesent malesuada congue magna at finibus. In hac habitasse platea dictumst. 
+                        Curabitur rhoncus auctor eleifend. Fusce venenatis diam urna, eu pharetra 
+                        arcu varius ac. Etiam cursus turpis lectus, id iaculis risus tempor id. 
+                        Phasellus fringilla nisl sed sem scelerisque, eget aliquam magna vehicula
+                        .nteger nec bibendum lacus.
+                    </div>
+
+                    <ul class="sermon-actions">
+                        <li><img src="{% static 'sermon/images/sermon_1.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_2.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_3.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_4.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_5.svg' %}" alt=""></li>
+                        <li><img src="{% static 'sermon/images/sermon_6.svg' %}" alt=""></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- similar sermons section  -->
+<section id="related-sermon-wrapper" class="sermon-wrapper">
+    
+    <div class="today-sermon-container">
+        <div class="center">
+            <h1>Similar Sermons</h1>
+            <p class="heading-subtitle">Recommended</p>
+        </div>
+
+        {% with similar_sermons as ss %}
+        <div class="two-equ-cols-container">
+            {% for s in ss %}
+            <div class="sermon-details">
+                <h3><a href="">{{ s.title }}</a></h3>
+                <div class="semon-info">
+                    <p>Sermon by: <span class="red-text">{{ s.author.first_name }} {{ s.author.last_name }}</span></p>
+                    <p>Tags: <span class="red-text">{{ s.tags.all|join:", " }}</span></p>
+                    <p>Date: <span class="red-text">{{ s.date_created|date:"l j F, Y"  }}</span></p>
+                </div>
+
+                <div class="description">
+                   {{ s.summary }}
+                </div>
+
+                <ul class="sermon-actions">
+                    <li><img src="{% static 'sermon/images/sermon_1.svg' %}" alt=""></li>
+                    <li><img src="{% static 'sermon/images/sermon_2.svg' %}" alt=""></li>
+                    <li><img src="{% static 'sermon/images/sermon_3.svg' %}" alt=""></li>
+                    <li><img src="{% static 'sermon/images/sermon_4.svg' %}" alt=""></li>
+                    <li><img src="{% static 'sermon/images/sermon_5.svg' %}" alt=""></li>
+                    <li><img src="{% static 'sermon/images/sermon_6.svg' %}" alt=""></li>
+                </ul>
+            </div>
+            {% endfor %}
+        </div>
+        {% endwith %}
+    </div>
+    
+</section>
+{% endblock content %}
