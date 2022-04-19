@@ -19,7 +19,7 @@
                 <div class="heading">
                     <h2>{{ post.title }}</h2>
                     <p class="subtitle">
-                        By <a href="{% url 'user:profile' post.author.id %}">{{ post.author.first_name|title }} {{ post.author.last_name|title }}</a>| In {{ post.category }} | {{ post.comment_set.count }}
+                        By <a href="{{ post.author.profile.get_absolute_url }}">{{ post.author.first_name|title }} {{ post.author.last_name|title }}</a>| In {{ post.category }} | {{ post.comment_set.count }}
                         Comments
                     </p>
                 </div>

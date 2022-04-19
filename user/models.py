@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
+from django.urls import reverse
 
 # Create your models here.
 class Profile(models.Model):
@@ -14,6 +15,9 @@ class Profile(models.Model):
 
     def __str__(self) -> str:
         return self.user.username
+
+    def get_absolute_url(self):
+        return reverse('user:profile', args=(self.id,))
 
 
 @receiver(post_save, sender=User)

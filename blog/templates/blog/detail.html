@@ -16,7 +16,7 @@
         <div class="heading">
             <h2>{{ post.title }}</h2>
             <p class="subtitle">
-                By <a href="{% url 'user:profile' post.author.id %}">{{ post.author.first_name|title }} {{ post.author.last_name|title }}</a> | In {{ post.category }} | {{ post.comment_set.count }} Comments
+                By <a href="{{ post.author.profile.get_absolute_url }}">{{ post.author.first_name|title }} {{ post.author.last_name|title }}</a> | In {{ post.category }} | {{ post.comment_set.count }} Comments
                 {% if request.user == post.author %}
                 |<a href="{% url 'blog:edit' post.id post.slug %}">Edit</a>
                 |<a href="{% url 'blog:delete' post.id post.slug %}"><i class="fas fa-trash"></i></i></a>
@@ -32,7 +32,7 @@
             {% for comment in comments %}
             <div class="comment">
                 <div class="comment-details">
-                    <a href="{% url 'user:profile' comment.user.id %}"><img src="{{ comment.user.profile.pic.url }}"
+                    <a href="{{ comment.user.profile.get_absolute_url }}"><img src="{{ comment.user.profile.pic.url }}"
                             class="circle-img"></a>
                     <p>{{ comment.user.username|title }}<br>{{ comment.user.profile.bio }}</p>
                     <p class="comment-date">{{ comment.date_created }}</p>
