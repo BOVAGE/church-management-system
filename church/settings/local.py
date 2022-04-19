@@ -155,3 +155,8 @@ FILE_UPLOAD_PERMISSIONS = 0O640
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'blog:index'
+
+# REDIS configuration 
+REDIS_HOST = 'localhost'
+REDIS_PORT = 6379
+REDIS_DB = 0

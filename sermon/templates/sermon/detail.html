@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block style %} <link rel="stylesheet" href="{% static 'sermon/css/sermon.css' %}"> {% endblock style %}
+{% block title %}Sermon - {{ sermon.title }} {% endblock title %}
+
+{% block content %}
+<div class="container">
+    <div class="img-container">
+        <img src="{{ sermon.image.url }}" alt="sermon image">
+    </div>
+
+   
+    <div class="sermon">
+        
+        <div class="heading">
+            <h2>{{ sermon.title }}</h2>
+
+            <ul class="sermon-actions">
+                <li><img src="{% static 'sermon/images/sermon_1.svg' %}" alt=""></li>
+                <li><img src="{% static 'sermon/images/sermon_2.svg' %}" alt=""></li>
+                <li><img src="{% static 'sermon/images/sermon_3.svg' %}" alt=""></li>
+                <li><img src="{% static 'sermon/images/sermon_4.svg' %}" alt=""></li>
+                <li><img src="{% static 'sermon/images/sermon_5.svg' %}" alt=""></li>
+                <li><img src="{% static 'sermon/images/sermon_6.svg' %}" alt=""></li>
+            </ul>
+
+            <div class="semon-info">
+                <p>Sermon by: <span class="red-text">{{ sermon.author.first_name }} {{ sermon.author.last_name }}</span></p>
+                <p>Tags: <span class="red-text">{{ sermon.tags.all|join:", " }}</span></p>
+                <p>Date: <span class="red-text">{{ sermon.date_created|date:"l j F, Y"  }}</span></p>
+                <p>View: <span class="red-text">{{ total_views  }}  View{{ total_views|pluralize  }}</span></p>
+            </div>
+
+        </div>
+
+        <div class="content">
+            {{ sermon.content|safe }}
+        </div>
+
+        <hr>
+
+        <div class="author">
+            <a href="{{ sermon.author.profile.get_absolute_url }}">
+                <img src="{{ sermon.author.profile.pic.url }}" class="circle-img" alt="Author-Profile-Pic">
+            </a>
+            <p>{{ sermon.author.profile.bio }}</p>
+            <p>{{ sermon.author.profile.role }}</p>
+        </div>
+    </div>
+
+</div>
+{% endblock content %}

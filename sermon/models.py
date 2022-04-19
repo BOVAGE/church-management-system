@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.urls import reverse
 from ckeditor.fields import RichTextField
 from taggit.managers import TaggableManager
 from datetime import date
@@ -32,4 +33,4 @@ class Sermon(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        pass
+        return reverse('sermon:sermon_single', args=(self.date_created.year,self.date_created.month, self.date_created.day, self.slug))
