@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Announcement, Category, Comment, Post
+from .models import Announcement, Category, Comment, Post, BibleVerse
 
 # Register your models here.
 class PostAdmin(admin.ModelAdmin):
@@ -13,7 +13,11 @@ class CommentAdmin(admin.ModelAdmin):
     search_fields = ['user__username', 'comment_text', 'post__title']
     list_filter = ['user', 'post']
 
+class BibleVerseAdmin(admin.ModelAdmin):
+    list_display = ['bible_verse', 'ref', 'date_for']
+
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Category)
 admin.site.register(Announcement)
+admin.site.register(BibleVerse, BibleVerseAdmin)

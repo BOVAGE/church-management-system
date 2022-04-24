@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.urls import reverse
+from utils.bible_books import BIBLE_CHOICES
+import requests
 
 # Create your models here.
 class Category(models.Model):
@@ -60,3 +62,20 @@ class Announcement(models.Model):
 
     def __str__(self):
         return self.event_name
+
+class BibleVerse(models.Model):
+    bible_verse = models.CharField(max_length=20, choices=BIBLE_CHOICES)
+    ref = models.CharField(max_length=10, help_text="Write in this format: \
+                            chapter:verse and chapter:start-end in case of range")
+    date_for = models.DateField()
+
+    def __str__(self):
+        return f"{self.bible_verse} {self.ref}"
+
+    def get_bible_verse(self):
+        verse_ref = str(self)
+        url = 'https://bible-api.com/' + verse_ref
+        print(url)
+        response = requests.get(url).json()
+        text =  response['text']
+        return text
