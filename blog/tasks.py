@@ -1,4 +1,6 @@
 from celery import shared_task
+from celery.schedules import crontab
+from church.celery import app
 from .models import BibleVerse
 import redis
 from django.conf import settings
@@ -15,3 +17,12 @@ def today_bible_verse(id):
     #store in redis 
     r.set('today_bible_verse', today_bible_verse)
     return today_bible_verse
+
+app.conf.beat_schedule = {
+    # Executes at the midnight of every day 
+    'get-daily-bible-verse': {
+        'task': 'blog.tasks.today_bible_verse',
+        'schedule': crontab(hour=0, minute=5),
+        'args': (BibleVerse.today.first().id,),
+    },
+}

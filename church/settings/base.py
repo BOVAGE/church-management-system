@@ -15,6 +15,12 @@ import os
 from decouple import config
 from django.contrib.messages import constants as messages
 
+# django 4 does not support force_text
+# here is a hack to fix it 
+import django
+from django.utils.encoding import force_str
+django.utils.encoding.force_text = force_str
+
 #allows to use bootstrap class as the 
 #tags for their respective messages
 MESSAGE_TAGS = {
