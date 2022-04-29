@@ -1,15 +1,21 @@
-import re
 from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
 from django.http import HttpResponseRedirect, JsonResponse
 from django.urls import reverse
-from .models import Post, Category, Comment
+from blog.tasks import today_bible_verse
+from .models import Post, Category, Comment, BibleVerse
 from .forms import CommentForm, PostForm
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from .newsletter import newsletter 
+import redis
+from django.conf import settings
 
+#connect to redis
+r = redis.Redis(host=settings.REDIS_HOST,
+                port=settings.REDIS_PORT,
+                db=settings.REDIS_DB)
 
 # Create your views here.
 def index(request):
@@ -22,7 +28,17 @@ def index(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     all_categories = Category.objects.all()
-    context = {'all_posts': all_posts, 'all_categories': all_categories, 'page_obj': page_obj, 'category': category}
+
+    #today's bible verse
+    today_bible_verse_obj = BibleVerse.today.first()
+    text = "Not loaded Yet"
+    if r.get('today_bible_verse') == None:
+        today_bible_verse.delay(today_bible_verse_obj.id)
+    else:
+        text = r.get('today_bible_verse').decode("utf-8")
+    bv = {'bible_ref': str(today_bible_verse_obj),'text': text}
+    context = {'all_posts': all_posts, 'all_categories': all_categories, 'page_obj': page_obj, 
+            'category': category, 'bv': bv}
     return render(request, 'blog/index.html', context)
 
 def about(request):

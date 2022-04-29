@@ -58,6 +58,7 @@ INSTALLED_APPS = [
 
     'ckeditor',
     'taggit',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
