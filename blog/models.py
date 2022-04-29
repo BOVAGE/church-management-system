@@ -1,3 +1,4 @@
+from datetime import date
 from django.contrib import messages
 from django.db import models
 from django.contrib.auth.models import User
@@ -63,11 +64,20 @@ class Announcement(models.Model):
     def __str__(self):
         return self.event_name
 
+class TodayBibleVerse(models.Manager):
+    def get_queryset(self):
+        return super(TodayBibleVerse,self).get_queryset().filter(date_for=date.today())
+
+
 class BibleVerse(models.Model):
     bible_verse = models.CharField(max_length=20, choices=BIBLE_CHOICES)
     ref = models.CharField(max_length=10, help_text="Write in this format: \
                             chapter:verse and chapter:start-end in case of range")
     date_for = models.DateField()
+
+    objects = models.Manager()
+    today = TodayBibleVerse()
+
 
     def __str__(self):
         return f"{self.bible_verse} {self.ref}"
