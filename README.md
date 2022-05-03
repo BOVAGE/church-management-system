@@ -14,6 +14,7 @@ This is a church management website created with Django.
 - [x] newsletter
 - [x] Sermon
 - [x] daily bible verse on home page
+- [x] generate pdf file of sermon when file icon is clicked
 
 # Database
 Postgresql
@@ -23,6 +24,5 @@ Postgresql
 
 # Todos
 - [ ] search
-- [ ] generate pdf file of sermon based on request
 - [ ] integrating paystack for donations
 - [ ] customized admin dashboard

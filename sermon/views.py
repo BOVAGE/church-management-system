@@ -1,9 +1,13 @@
-from webbrowser import get
 from django.shortcuts import render, HttpResponse, get_object_or_404
 from django.db.models import Count
+from django.template.loader import render_to_string
 from .models import Sermon
 from django.conf import settings
-import redis, json
+import os
+#added to fix os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\bin")
+os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\bin")
+
+import redis, json, weasyprint
 
 #connect to redis
 r = redis.Redis(host=settings.REDIS_HOST,
@@ -46,3 +50,14 @@ def detail(request, year, month, day, slug):
     r.zincrby('sermon_ranking', 1, sermon.id)
     context = {'sermon': sermon, 'total_views': total_views}
     return render(request, 'sermon/detail.html', context)
+
+def sermon_pdf(request, id):
+    # generate the pdf of each sermon 
+    sermon = get_object_or_404(Sermon, id=id)
+    html = render_to_string('sermon/sermon_pdf.html', {'sermon': sermon})
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = f'filename=sermon_{sermon.slug}.pdf'
+    weasyprint.HTML(string=html, base_url=request.build_absolute_uri()).write_pdf(response, 
+        stylesheets=[weasyprint.CSS(settings.STATIC_ROOT + 'sermon/css/sermon.css'),
+        weasyprint.CSS(settings.STATIC_ROOT + 'blog/css/base.css')])
+    return response

@@ -19,7 +19,9 @@
                 <li><img src="{% static 'sermon/images/sermon_1.svg' %}" alt=""></li>
                 <li><img src="{% static 'sermon/images/sermon_2.svg' %}" alt=""></li>
                 <li><img src="{% static 'sermon/images/sermon_3.svg' %}" alt=""></li>
-                <li><img src="{% static 'sermon/images/sermon_4.svg' %}" alt=""></li>
+                <a href="{% url 'sermon:sermon_pdf' sermon.id %}">
+                    <li><img src="{% static 'sermon/images/sermon_4.svg' %}" alt=""></li>
+                </a>
                 <li><img src="{% static 'sermon/images/sermon_5.svg' %}" alt=""></li>
                 <li><img src="{% static 'sermon/images/sermon_6.svg' %}" alt=""></li>
             </ul>
@@ -37,14 +39,16 @@
             {{ sermon.content|safe }}
         </div>
 
-        <hr>
-
-        <div class="author">
-            <a href="{{ sermon.author.profile.get_absolute_url }}">
-                <img src="{{ sermon.author.profile.pic.url }}" class="circle-img" alt="Author-Profile-Pic">
-            </a>
-            <p>{{ sermon.author.profile.bio }}</p>
-            <p>{{ sermon.author.profile.role }}</p>
+        <div class="comment">
+            <div class="comment-details">
+                <a href="{{ sermon.author.profile.get_absolute_url }}">
+                    <img src="{{ sermon.author.profile.pic.url }}" class="circle-img" alt="Author-Profile-Pic">
+                </a>
+                <div>
+                    <p>{{ sermon.author.profile.bio }}</p>
+                    <p class="subtitle">{{ sermon.author.profile.role }}</p>
+                </div>
+            </div>
         </div>
     </div>
 

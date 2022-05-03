@@ -1,0 +1,51 @@
+{% load static %}
+<html lang="en">
+<body>
+    <div class="container">
+        <div class="img-container">
+            <img src="{{ sermon.image.url }}" alt="sermon image">
+        </div>
+    
+       
+        <div class="sermon">
+            
+            <div class="heading">
+                <h2>{{ sermon.title }}</h2>
+    
+                <ul class="sermon-actions">
+                    <li><img src="{% static 'sermon/images/sermon_1.svg' %}" alt=""></li>
+                    <li><img src="{% static 'sermon/images/sermon_2.svg' %}" alt=""></li>
+                    <li><img src="{% static 'sermon/images/sermon_3.svg' %}" alt=""></li>
+                    <li><img src="{% static 'sermon/images/sermon_4.svg' %}" alt=""></li>
+                    <li><img src="{% static 'sermon/images/sermon_5.svg' %}" alt=""></li>
+                    <li><img src="{% static 'sermon/images/sermon_6.svg' %}" alt=""></li>
+                </ul>
+    
+                <div class="semon-info">
+                    <p>Sermon by: <span class="red-text">{{ sermon.author.first_name }} {{ sermon.author.last_name }}</span></p>
+                    <p>Tags: <span class="red-text">{{ sermon.tags.all|join:", " }}</span></p>
+                    <p>Date: <span class="red-text">{{ sermon.date_created|date:"l j F, Y"  }}</span></p>
+                </div>
+    
+            </div>
+    
+            <div class="content">
+                {{ sermon.content|safe }}
+            </div>
+    
+            <div class="comment">
+                <div class="comment-details">
+                    <a href="{{ sermon.author.profile.get_absolute_url }}">
+                        <img src="{{ sermon.author.profile.pic.url }}" class="circle-img" alt="Author-Profile-Pic">
+                    </a>
+                    <div>
+                        <p>{{ sermon.author.profile.bio }}</p>
+                        <p class="subtitle">{{ sermon.author.profile.role }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>
