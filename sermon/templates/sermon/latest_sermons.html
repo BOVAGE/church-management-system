@@ -1,0 +1,13 @@
+{% load static %}
+{% for sermon in latest_sermons %}
+    <div class="side-post">
+        <img src="{% static 'blog/images/latest_1.jpg' %}" alt="pray">
+        <!-- work on using the cropped image of the sermon image  -->
+        <div>
+            <time datetime="2018-03-06">{{ sermon.date_created }}</time>
+            <p>{{ sermon.title }}</p>
+        </div>
+    </div>
+{% empty %}
+    <p>No Sermon to show</p>
+{% endfor %}

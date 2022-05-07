@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load sermon_tags %}
 {% load static %}
 {% block title %}Believe - Home {% endblock title %}
 
@@ -57,37 +58,8 @@
 
             <h2>Latest Sermons</h2>
 
-            <div class="side-post">
-                <img src="{% static 'blog/images/latest_1.jpg' %}" alt="pray">
-                <div>
-                    <time datetime="2018-03-06">06 March, 2021</time>
-                    <p>How to pray the right way</p>
-                </div>
-            </div>
+            {% show_latest_sermons %}
 
-            <div class="side-post">
-                <img src="{% static 'blog/images/latest_2.jpg' %}" alt="Bible">
-                <div>
-                    <time datetime="2018-03-06">06 March, 2021</time>
-                    <p>How to pray the right way</p>
-                </div>
-            </div>
-
-            <div class="side-post">
-                <img src="{% static 'blog/images/latest_3.jpg' %}" alt="narrow church">
-                <div>
-                    <time datetime="2018-03-06">06 March, 2021</time>
-                    <p>How to pray the right way</p>
-                </div>
-            </div>
-
-            <div class="side-post">
-                <img src="{% static 'blog/images/latest_4.jpg' %}" alt="youth">
-                <div>
-                    <time datetime="2018-03-06">06 March, 2021</time>
-                    <p>How to pray the right way</p>
-                </div>
-            </div>
 
             <!-- categories section -->
             <div class="categories">
