@@ -23,7 +23,7 @@
                     <li><img src="{% static 'sermon/images/sermon_4.svg' %}" alt=""></li>
                 </a>
                 <li><img src="{% static 'sermon/images/sermon_5.svg' %}" alt=""></li>
-                <li><img src="{% static 'sermon/images/sermon_6.svg' %}" alt=""></li>
+                <li><img src="{% static 'sermon/images/sermon_6.svg' %}" id="play" alt=""></li>
             </ul>
 
             <div class="semon-info">
@@ -54,3 +54,7 @@
 
 </div>
 {% endblock content %}
+
+{% block js %}
+    <script src="{% static 'sermon/js/read_text.js' %}"></script>
+{% endblock js %}

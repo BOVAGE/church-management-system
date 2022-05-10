@@ -50,6 +50,10 @@ img {
     margin-right: 20px;
 }
 
+
+#play {
+    cursor: pointer;
+}
 /* overidding base.css  */
 .showcase-container {
     margin-bottom: 0;
