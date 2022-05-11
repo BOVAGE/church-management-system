@@ -61,6 +61,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
 
     'ckeditor',
     'taggit',
@@ -162,3 +164,7 @@ FILE_UPLOAD_PERMISSIONS = 0O640
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'blog:index'
+
+#Sitemap settings
+
+SITE_ID = 1
