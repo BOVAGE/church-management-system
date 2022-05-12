@@ -6,3 +6,6 @@ pipfile.lock
 
 # celery beat 
 celerybeat*
+
+#redis
+dump.rdb
