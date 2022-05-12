@@ -33,8 +33,9 @@ urlpatterns = [
     path('', include('blog.urls')),
     path('user/', include('user.urls')),
     path('sermon/', include('sermon.urls')),
+    path('search/', include('search.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
-     name='django.contrib.sitemaps.views.sitemap')
+     name='django.contrib.sitemaps.views.sitemap'),
 ]
 handler404 = 'blog.views.error_404'
 handler403 = 'blog.views.error_403'

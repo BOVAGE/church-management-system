@@ -406,7 +406,6 @@ aside h2 {
 }
 
 .search-box {
-	background: url('../images/search.png') no-repeat 95% center;
 	width: 100%;
 	background-color: #ededed;
 	margin-bottom: 100px;
@@ -415,10 +414,6 @@ aside h2 {
 .side-post {
 	display: flex;
 	margin-bottom: 20px;
-}
-
-div.side-post:nth-child(6) {
-	margin-bottom: 100px;
 }
 
 .side-post img {

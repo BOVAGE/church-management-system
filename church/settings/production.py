@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'user',
     'blog',
     'sermon',
+    'search',
     
     'django.contrib.admin',
     'django.contrib.auth',
@@ -57,6 +58,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'django.contrib.sitemaps',
+    'django.contrib.postgres',
 
     'ckeditor',
     'storages',

@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Search - {{query}}{% endblock title %}
+{% block style %}<link rel="stylesheet" href="{% static 'search/css/search.css' %}">{% endblock style %}
+{% block current-page %}Search{% endblock current-page %}
+{% block content %}
+<div class="container">
+    <h1>You searched for this: <span class="highlight">{{ query }}</span></h1>
+    <div class="search-result">
+        {% if search_result %}
+            {% with search_result|length as total_result %}
+            <h2>Found {{ total_result }} result{{ total_result|pluralize }}</h2>
+            <h3>Your search result:</h3>
+            {% endwith %}
+
+            {% for result in search_result %}
+                <div class="side-post">
+                    <img src="{% static 'blog/images/latest_1.jpg' %}" alt="pray">
+                    <!-- work on using the cropped image of the sermon image  -->
+                    <div>
+                        <time datetime="{{ result.date_created }}">{{ result.date_created }}</time>
+                        <p><a href="{{ result.get_absolute_url }}">{{ result.title }}</a></p>
+                        <p>{{ result.author }}</p>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>There is no result for this query.</p>
+        {% endif %}
+    </div>
+
+    <p>Search again</p>
+    <form action="{% url 'search:search' %}" method="get">
+        <input class = "search-box" type = "search" name = "q" placeholder = "search" required>
+    </form>
+</div>
+{% endblock %}

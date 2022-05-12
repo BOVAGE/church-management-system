@@ -55,6 +55,9 @@
         </div>
 
         <aside>
+            <form action="{% url 'search:search' %}" method="get">
+                <input class = "search-box" type = "search" name = "q" placeholder = "search" required>
+            </form>
 
             <h2>Latest Sermons</h2>
 
