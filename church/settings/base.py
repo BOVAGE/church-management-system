@@ -167,6 +167,7 @@ FILE_UPLOAD_PERMISSIONS = 0O640
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'blog:index'
+LOGIN_URL = 'user:login'
 
 #Sitemap settings
 

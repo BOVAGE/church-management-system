@@ -161,6 +161,7 @@ FILE_UPLOAD_PERMISSIONS = 0O640
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'blog:index'
+LOGIN_URL = 'user:login'
 
 #aws s3 bucket config
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')

@@ -8,6 +8,7 @@
         <div class="center">
             {% if request.user == user %}
                 <a href="{% url 'user:edit' user.id %}">Edit</a>
+                <a href="{% url 'user:password_change' %}">Change Password</a>
             {% endif %}
             <img src="{{ profile.pic.url }}" alt="profile image" class="circle-img">
             <p>Username: {{ user.username }}</p>

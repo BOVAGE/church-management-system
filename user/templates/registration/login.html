@@ -18,6 +18,7 @@
                 <input type="submit" value="Login" class="action">
                 <input type="hidden" name="next" value="{{ request.GET.next }}"/>
                 <p>Not a member?<a class="blue-link" href="{% url 'user:register' %}">Register</a></p>
+                <p><a class="blue-link" href="{% url 'user:password_reset' %}">Forgot Password</a></p>
             </form>
         </div>
     </div>
