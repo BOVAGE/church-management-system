@@ -43,3 +43,8 @@ handler403 = 'blog.views.error_403'
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+
+# admin site overrides 
+admin.site.index_title = "Believe Administration"
+admin.site.site_header = "Believe Administration"
+admin.site.site_title = "Believe Admin"

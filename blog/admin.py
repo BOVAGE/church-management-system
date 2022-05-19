@@ -2,11 +2,17 @@ from django.contrib import admin
 from .models import Announcement, Category, Comment, Post, BibleVerse
 
 # Register your models here.
+class CommentInline(admin.TabularInline):
+    model = Comment
+
+
 class PostAdmin(admin.ModelAdmin):
     list_display = ['title', 'author', 'date_created']
     list_filter = ['title', 'author', 'date_created']
     search_fields = ['title', 'body', 'description']
     prepopulated_fields = {'slug': ('title',)}
+    inlines = [CommentInline]
+
 
 class CommentAdmin(admin.ModelAdmin):
     list_display = ['user', 'comment_text', 'post']

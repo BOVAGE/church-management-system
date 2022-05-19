@@ -23,6 +23,6 @@ app.conf.beat_schedule = {
     'get-daily-bible-verse': {
         'task': 'blog.tasks.today_bible_verse',
         'schedule': crontab(hour=0, minute=5),
-        'args': (BibleVerse.today.first().id,),
+        'args': 1,#(BibleVerse.today.first().id,),
     },
 }
