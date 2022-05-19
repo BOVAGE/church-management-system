@@ -1,7 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.conf import settings
+from django.urls import reverse
 from .forms import PaymentForm
 from .models import Donation
 import requests
@@ -22,6 +23,8 @@ def transact(request):
             instance.save()
             print(instance.ref_id)
             return JsonResponse({'ref_id': instance.ref_id})
+        else:
+            return redirect(reverse('payment:donate'))
     form = PaymentForm(initial={'full_name': f'{user.first_name} {user.last_name}',
     'email_address': user.email})  
     context = {'form': form}
@@ -39,12 +42,10 @@ def verfiy_payment(request, reference):
         instance = Donation.objects.get(ref_id=reference)
         instance.paid = True
         instance.save()
-        print("Paid")
-
     return JsonResponse(data, safe=False)
 
 def success(request):
-    return HttpResponse('Payment Successful')
+    return render(request, 'payment/success.html')
 
 def failure(request):
-    return HttpResponse('Payment not Successful')
+    return render(request, 'payment/failure.html')
