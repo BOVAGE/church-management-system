@@ -18,6 +18,7 @@ This is a church management website created with Django.
 - [x] Audio Sermon
 - [x] search
 - [x] customized admin dashboard
+- [x] integrating paystack for donations
 
 # Database
 Postgresql
@@ -25,5 +26,3 @@ Postgresql
 # Tools used
 - AWS for serving static files & file upload
 
-# Todos
-- [ ] integrating paystack for donations
