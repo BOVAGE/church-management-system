@@ -1,4 +1,5 @@
 {% load static %}
+{% load filters %}
 <!DOCTYPE html>
 <html>
 	<head>
@@ -81,7 +82,7 @@
 		<section class = "showcase-container">
 			<div class = "showcase container">
 				<div class = "showcase-text">
-					<h1>{{ request.resolver_match.url_name|title }}</h1>
+					<h1>{{ request.resolver_match.url_name|title|pretty_ }}</h1>
 					<p><a class = "home" href = "{{ request.path }}">Home</a>/ <span class = "red-text">{% block current-page %}{% endblock current-page %}</span></p>
 				</div>
 			</div>

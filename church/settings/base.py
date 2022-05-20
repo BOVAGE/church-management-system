@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'sermon',
     'search',
     'payment',
+    'utils',
 
     'django.contrib.admin',
     'django.contrib.auth',

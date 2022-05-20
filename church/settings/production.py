@@ -49,7 +49,8 @@ INSTALLED_APPS = [
     'blog',
     'sermon',
     'search',
-    'payment'
+    'payment',
+    'utils',
     
     'django.contrib.admin',
     'django.contrib.auth',
