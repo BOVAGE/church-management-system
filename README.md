@@ -23,6 +23,7 @@ This is a church management website created with Django.
 # Database
 Postgresql
 
-# Tools used
-- AWS for serving static files & file upload
+# Technologies Used
+- AWS S3 for serving static files & file upload
+- Redis for Caching and Message Broker
 
