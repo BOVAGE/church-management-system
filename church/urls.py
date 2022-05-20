@@ -34,6 +34,7 @@ urlpatterns = [
     path('user/', include('user.urls')),
     path('sermon/', include('sermon.urls')),
     path('search/', include('search.urls')),
+    path('payment/', include('payment.urls')),
     path('sitemap.xml', sitemap, {'sitemaps': sitemaps},
      name='django.contrib.sitemaps.views.sitemap'),
 ]

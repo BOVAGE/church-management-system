@@ -1,0 +1,50 @@
+from django.shortcuts import render
+from django.http import JsonResponse, HttpResponse
+from django.contrib.auth.decorators import login_required
+from django.conf import settings
+from .forms import PaymentForm
+from .models import Donation
+import requests
+import datetime
+
+# Create your views here.
+transaction_url = "https://api.paystack.co/transaction/"
+
+
+@login_required(login_url='user:login')
+def transact(request):
+    user = request.user
+    if request.method == "POST":
+        form = PaymentForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.date = datetime.datetime.now()
+            instance.save()
+            print(instance.ref_id)
+            return JsonResponse({'ref_id': instance.ref_id})
+    form = PaymentForm(initial={'full_name': f'{user.first_name} {user.last_name}',
+    'email_address': user.email})  
+    context = {'form': form}
+    return render(request, 'payment/payment_form.html', context)
+    
+
+def verfiy_payment(request, reference):
+    headers = {
+        'Authorization': f'Bearer {settings.PAYSTACK_SECRET}'
+    }
+    response = requests.get(f'{transaction_url}verify/{reference}', headers=headers)
+    print(response.url)
+    data = response.json()
+    if data['data']['status'] == "success":
+        instance = Donation.objects.get(ref_id=reference)
+        instance.paid = True
+        instance.save()
+        print("Paid")
+
+    return JsonResponse(data, safe=False)
+
+def success(request):
+    return HttpResponse('Payment Successful')
+
+def failure(request):
+    return HttpResponse('Payment not Successful')

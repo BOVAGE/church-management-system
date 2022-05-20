@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'blog',
     'sermon',
     'search',
+    'payment',
 
     'django.contrib.admin',
     'django.contrib.auth',

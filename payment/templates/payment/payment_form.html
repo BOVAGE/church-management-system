@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" id="donate-btn" class="action" value="Pay">
+    </form>
+</div>
+{% endblock content %}
+
+{% block js %}
+    {{ public_key|json_script:"public_key" }}
+    <script src="https://js.paystack.co/v1/inline.js"></script> 
+    <script src="{% static 'payment/js/popup.js' %}"></script>
+{% endblock js %}

@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+        <p>Payment not Successful. Please <a href="{% url 'payment:donate' %}">Try again</a></p>
+    </div>
+{% endblock %}

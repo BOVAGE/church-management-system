@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'blog',
     'sermon',
     'search',
+    'payment',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -85,6 +86,7 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'blog.context_processors.announcement',
+                'payment.context_processors.get_payment_secret',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -169,3 +171,7 @@ REDIS_DB = 0
 #CELERY config
 CELERY_BROKER_URL = 'redis://localhost:6379'
 CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+
+# payment 
+PAYSTACK_SECRET = config('PAYSTACK_SECRET')
+PAYSTACK_PUBLIC = config('PAYSTACK_PUBLIC')
