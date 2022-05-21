@@ -4,6 +4,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from django.urls import reverse
+from django.utils.text import slugify
 from utils.bible_books import BIBLE_CHOICES
 import requests
 
@@ -20,7 +21,7 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=100, unique=True)
-    slug = models.SlugField(max_length=50)
+    slug = models.SlugField(max_length=50, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     description = models.CharField(max_length=1000)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -38,6 +39,11 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('blog:detail', args=(self.id,self.slug,))
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.title)
+        super().save(*args, **kwargs)
 
 
 class Comment(models.Model):
