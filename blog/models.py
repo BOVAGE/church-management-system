@@ -71,7 +71,7 @@ class Comment(models.Model):
     date_created = models.DateTimeField(auto_now_add=True)
     last_modified = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Returns string representation of Comment object"""
         return self.comment_text
 
@@ -88,7 +88,7 @@ class Announcement(models.Model):
     class Meta:
         ordering = ["event_date"]
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Returns string representation of Announcement object"""
         return self.event_name
 
@@ -112,7 +112,7 @@ class BibleVerse(models.Model):
     objects = models.Manager()
     today = TodayBibleVerse()
 
-    def __str__(self):
+    def __str__(self) -> str:
         """Returns string representation of BibleVerse object"""
         return f"{self.bible_verse} {self.ref}"
 
