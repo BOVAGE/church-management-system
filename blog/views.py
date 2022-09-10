@@ -1,23 +1,25 @@
-from django.shortcuts import get_object_or_404, redirect, render, HttpResponse
-from django.http import HttpResponseRedirect, JsonResponse
-from django.urls import reverse
-from blog.tasks import today_bible_verse
-from .models import Post, Category, Comment, BibleVerse
-from .forms import CommentForm, PostForm
-from django.core.paginator import Paginator
-from django.contrib.auth.decorators import login_required
-from django.core.exceptions import PermissionDenied
-from django.contrib import messages
-from .newsletter import newsletter
 import redis
 from django.conf import settings
+from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
+from django.core.paginator import Paginator
+from django.http import HttpResponseRedirect, JsonResponse
+from django.shortcuts import HttpResponse, get_object_or_404, redirect, render
+from django.urls import reverse
+
+from blog.tasks import today_bible_verse
+
+from .forms import CommentForm, PostForm
+from .models import BibleVerse, Category, Comment, Post
+from .newsletter import newsletter
 
 # connect to redis
 r = redis.Redis(
     host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=settings.REDIS_DB
 )
 
-# Create your views here.
+
 def index(request):
     category = request.GET.get("category", "")
     if not category:
@@ -32,7 +34,7 @@ def index(request):
     # today's bible verse
     today_bible_verse_obj = BibleVerse.today.first()
     text = "Not loaded Yet"
-    if r.get("today_bible_verse") == None:
+    if r.get("today_bible_verse") is None:
         today_bible_verse.delay(today_bible_verse_obj.id)
     else:
         text = r.get("today_bible_verse").decode("utf-8")

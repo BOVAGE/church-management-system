@@ -1,8 +1,9 @@
-import mailchimp_marketing as MailchimpMarketing
-from mailchimp_marketing.api_client import ApiClientError
-from decouple import config
 import hashlib
 import json
+
+import mailchimp_marketing as MailchimpMarketing
+from decouple import config
+from mailchimp_marketing.api_client import ApiClientError
 
 
 class Newsletter:
@@ -29,7 +30,7 @@ class Newsletter:
         """
         return json.loads(error.text)
 
-    def __init__(self, list_id: str):
+    def __init__(self, list_id: str) -> None:
         """initialize connection to mailchimp"""
         self.mailchimp = MailchimpMarketing.Client()
         self.mailchimp.set_config(
@@ -37,11 +38,11 @@ class Newsletter:
         )
         self.list_id = list_id
 
-    def __str__(self):
+    def __str__(self) -> str:
         """string representation of the newsletter object"""
         return f"Newsletter object for {self.list_id}"
 
-    def __eq__(self, other_object):
+    def __eq__(self, other_object) -> bool:
         """compares  two newsletter objects"""
         if isinstance(other_object, Newsletter):
             return self.list_id == other_object.list_id
@@ -56,6 +57,7 @@ class Newsletter:
         subscribed. This is useful as users who have unsubscribed might want
         to subscribe back. Moreso, when a user unsubsribed their email_address
         isn't removed from the list only their status is changed.
+
         More info on mailchimp docs as regards status and removing members.
         """
         try:

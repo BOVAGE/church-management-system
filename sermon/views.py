@@ -1,14 +1,19 @@
-from django.shortcuts import render, HttpResponse, get_object_or_404
-from django.db.models import Count
-from django.template.loader import render_to_string
-from .models import Sermon
-from django.conf import settings
 import os
+
+from django.conf import settings
+from django.db.models import Count
+from django.shortcuts import HttpResponse, get_object_or_404, render
+from django.template.loader import render_to_string
+
+from .models import Sermon
 
 # added to fix os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\bin")
 os.add_dll_directory(r"C:\Program Files\GTK3-Runtime Win64\bin")
 
-import redis, json, weasyprint
+import json
+
+import redis
+import weasyprint
 
 # connect to redis
 r = redis.Redis(
@@ -21,7 +26,7 @@ def index(request):
     if today_sermon:
         # increment today sermon views by 1
         total_views = r.get(f"sermon:{today_sermon.id}:views")
-        if total_views == None:
+        if total_views is None:
             total_views = "0"
         total_views = json.loads(total_views)
         today_sermon_tags_ids = today_sermon.tags.values_list("id", flat=True)
