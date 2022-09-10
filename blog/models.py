@@ -13,7 +13,7 @@ class Category(models.Model):
     category_name = models.CharField(max_length=20, unique=True)
 
     class Meta:
-        verbose_name_plural = 'categories'
+        verbose_name_plural = "categories"
 
     def __str__(self):
         return self.category_name
@@ -28,17 +28,23 @@ class Post(models.Model):
     last_modified = models.DateTimeField(auto_now=True)
     post_image = models.ImageField(upload_to="media/")
     body = RichTextField()
-    #body = models.TextField()
+    # body = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ['-last_modified']
+        ordering = ["-last_modified"]
 
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('blog:detail', args=(self.id,self.slug,))
+        return reverse(
+            "blog:detail",
+            args=(
+                self.id,
+                self.slug,
+            ),
+        )
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -59,39 +65,42 @@ class Comment(models.Model):
 
 class Announcement(models.Model):
     event_name = models.CharField(max_length=50)
-    featured = models.BooleanField() #only set one announcement to be True
+    featured = models.BooleanField()  # only set one announcement to be True
     event_date = models.DateTimeField(blank=True)
 
-    #order the annonument of the events in order of the closet event-date
-    #the closet event date comes first
+    # order the annonument of the events in order of the closet event-date
+    # the closet event date comes first
     class Meta:
-        ordering = ['event_date']
+        ordering = ["event_date"]
 
     def __str__(self):
         return self.event_name
 
+
 class TodayBibleVerse(models.Manager):
     def get_queryset(self):
-        return super(TodayBibleVerse,self).get_queryset().filter(date_for=date.today())
+        return super(TodayBibleVerse, self).get_queryset().filter(date_for=date.today())
 
 
 class BibleVerse(models.Model):
     bible_verse = models.CharField(max_length=20, choices=BIBLE_CHOICES)
-    ref = models.CharField(max_length=10, help_text="Write in this format: \
-                            chapter:verse and chapter:start-end in case of range")
+    ref = models.CharField(
+        max_length=10,
+        help_text="Write in this format: \
+                            chapter:verse and chapter:start-end in case of range",
+    )
     date_for = models.DateField()
 
     objects = models.Manager()
     today = TodayBibleVerse()
-
 
     def __str__(self):
         return f"{self.bible_verse} {self.ref}"
 
     def get_bible_verse(self):
         verse_ref = str(self)
-        url = 'https://bible-api.com/' + verse_ref
+        url = "https://bible-api.com/" + verse_ref
         print(url)
         response = requests.get(url).json()
-        text =  response['text']
+        text = response["text"]
         return text
