@@ -7,13 +7,13 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('payment', '0002_donation_paid'),
+        ("payment", "0002_donation_paid"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='donation',
-            name='ref_id',
+            model_name="donation",
+            name="ref_id",
             field=models.UUIDField(default=uuid.uuid4, editable=False, unique=True),
         ),
     ]

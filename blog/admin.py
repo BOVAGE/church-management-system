@@ -7,20 +7,22 @@ class CommentInline(admin.TabularInline):
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'author', 'date_created']
-    list_filter = ['title', 'author', 'date_created']
-    search_fields = ['title', 'body', 'description']
-    prepopulated_fields = {'slug': ('title',)}
+    list_display = ["title", "author", "date_created"]
+    list_filter = ["title", "author", "date_created"]
+    search_fields = ["title", "body", "description"]
+    prepopulated_fields = {"slug": ("title",)}
     inlines = [CommentInline]
 
 
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ['user', 'comment_text', 'post']
-    search_fields = ['user__username', 'comment_text', 'post__title']
-    list_filter = ['user', 'post']
+    list_display = ["user", "comment_text", "post"]
+    search_fields = ["user__username", "comment_text", "post__title"]
+    list_filter = ["user", "post"]
+
 
 class BibleVerseAdmin(admin.ModelAdmin):
-    list_display = ['bible_verse', 'ref', 'date_for']
+    list_display = ["bible_verse", "ref", "date_for"]
+
 
 admin.site.register(Post, PostAdmin)
 admin.site.register(Comment, CommentAdmin)
