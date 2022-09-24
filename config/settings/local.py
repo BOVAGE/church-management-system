@@ -63,7 +63,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "church.urls"
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
@@ -83,7 +83,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "church.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Database
