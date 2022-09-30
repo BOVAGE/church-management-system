@@ -39,13 +39,18 @@ ALLOWED_HOSTS = []
 
 # Application definition
 
-INSTALLED_APPS = [
+LOCAL_APPS = [
+    # custom apps
     "user",
     "blog",
     "sermon",
     "search",
     "payment",
     "utils",
+]
+
+DJANGO_APPS = [
+    # default django-apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -55,10 +60,17 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.sitemaps",
     "django.contrib.postgres",
+]
+
+THIRD_PARTY_APPS = [
     "ckeditor",
     "taggit",
     "django_celery_beat",
 ]
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
+# local apps shall override djangos default, so order is important
+INSTALLED_APPS = LOCAL_APPS + DJANGO_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
