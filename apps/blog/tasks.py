@@ -1,6 +1,6 @@
 from celery import shared_task
 from celery.schedules import crontab
-from church.celery import app
+from config.celery import app
 from .models import BibleVerse
 import redis
 from django.conf import settings

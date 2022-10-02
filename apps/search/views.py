@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from blog.models import Post
-from sermon.models import Sermon
+from apps.blog.models import Post
+from apps.sermon.models import Sermon
 from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 from itertools import chain
 from django.contrib.auth import get_user_model

@@ -27,18 +27,23 @@ SECRET_KEY = config("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", cast=bool)
 
-ALLOWED_HOSTS = ["cbelieve.herokuapp.com"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
 
-INSTALLED_APPS = [
-    "user",
-    "blog",
-    "sermon",
-    "search",
-    "payment",
-    "utils",
+LOCAL_APPS = [
+    # custom apps
+    "apps.user",
+    "apps.blog",
+    "apps.sermon",
+    "apps.search",
+    "apps.payment",
+    "apps.utils",
+]
+
+DJANGO_APPS = [
+    # default django-apps
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -48,11 +53,17 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.sitemaps",
     "django.contrib.postgres",
+]
+
+THIRD_PARTY_APPS = [
     "ckeditor",
-    "storages",
     "taggit",
     "django_celery_beat",
 ]
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
+# local apps shall override djangos default, so order is important
+INSTALLED_APPS = LOCAL_APPS + DJANGO_APPS + THIRD_PARTY_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -64,7 +75,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "church.urls"
+ROOT_URLCONF = "config.urls"
 
 TEMPLATES = [
     {
@@ -74,6 +85,7 @@ TEMPLATES = [
         "OPTIONS": {
             "context_processors": [
                 "blog.context_processors.announcement",
+                "payment.context_processors.get_payment_secret",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
@@ -83,22 +95,21 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "church.wsgi.application"
+WSGI_APPLICATION = "config.wsgi.application"
 
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
+        "NAME": "church",
+        "USER": "postgres",
+        "PASSWORD": config("DB_PASSWORD"),
+        "HOST": "localhost",
+        "PORT": 5432,
     }
 }
-
-import dj_database_url
-
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES["default"].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -142,8 +153,9 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles/")
 
+
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 FILE_UPLOAD_PERMISSIONS = 0o640
 
 # Default primary key field type
@@ -153,10 +165,18 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_REDIRECT_URL = "blog:index"
 LOGIN_URL = "user:login"
 
-# aws s3 bucket config
-AWS_ACCESS_KEY_ID = config("AWS_ACCESS_KEY_ID")
-AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
-AWS_STORAGE_BUCKET_NAME = "churchbelieve"
-AWS_QUERYSTRING_AUTH = False
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
-STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+# REDIS configuration
+REDIS_HOST = "localhost"
+REDIS_PORT = 6379
+REDIS_DB = 0
+
+# CELERY config
+CELERY_BROKER_URL = "redis://localhost:6379"
+CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
+# payment
+PAYSTACK_SECRET = config("PAYSTACK_SECRET")
+PAYSTACK_PUBLIC = config("PAYSTACK_PUBLIC")
+
+# Email Config
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
