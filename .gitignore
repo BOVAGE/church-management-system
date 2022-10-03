@@ -1,8 +1,7 @@
 .env
 staticfiles
 media
-pipfile
-pipfile.lock
+
 
 # celery beat 
 celerybeat*
