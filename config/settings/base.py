@@ -41,12 +41,12 @@ ALLOWED_HOSTS = []
 
 LOCAL_APPS = [
     # custom apps
-    "user",
-    "blog",
-    "sermon",
-    "search",
-    "payment",
-    "utils",
+    "apps.user",
+    "apps.blog",
+    "apps.sermon",
+    "apps.search",
+    "apps.payment",
+    "apps.utils",
 ]
 
 DJANGO_APPS = [
@@ -91,7 +91,7 @@ TEMPLATES = [
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
-                "blog.context_processors.announcement",
+                "apps.blog.context_processors.announcement",
                 "django.template.context_processors.debug",
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",

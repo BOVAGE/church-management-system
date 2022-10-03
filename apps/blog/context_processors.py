@@ -1,4 +1,4 @@
-from .models import Announcement
+from apps.blog.models import Announcement
 
 
 def announcement(request):

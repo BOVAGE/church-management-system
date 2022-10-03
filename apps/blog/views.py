@@ -8,11 +8,11 @@ from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import HttpResponse, get_object_or_404, redirect, render
 from django.urls import reverse
 
-from blog.tasks import today_bible_verse
+from apps.blog.tasks import today_bible_verse
 
-from .forms import CommentForm, PostForm
-from .models import BibleVerse, Category, Comment, Post
-from .newsletter import newsletter
+from apps.blog.forms import CommentForm, PostForm
+from apps.blog.models import BibleVerse, Category, Comment, Post
+from apps.blog.newsletter import newsletter
 
 # connect to redis
 r = redis.Redis(

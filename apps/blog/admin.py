@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Announcement, Category, Comment, Post, BibleVerse
+from apps.blog.models import Announcement, Category, Comment, Post, BibleVerse
 
 # Register your models here.
 class CommentInline(admin.TabularInline):

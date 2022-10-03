@@ -34,12 +34,12 @@ ALLOWED_HOSTS = ["cbelieve.herokuapp.com"]
 
 LOCAL_APPS = [
     # custom apps
-    "user",
-    "blog",
-    "sermon",
-    "search",
-    "payment",
-    "utils",
+    "apps.user",
+    "apps.blog",
+    "apps.sermon",
+    "apps.search",
+    "apps.payment",
+    "apps.utils",
 ]
 
 DJANGO_APPS = [

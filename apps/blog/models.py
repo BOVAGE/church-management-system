@@ -7,7 +7,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.urls import reverse
 from django.utils.text import slugify
-from utils.bible_books import BIBLE_CHOICES
+from apps.utils.bible_books import BIBLE_CHOICES
 
 User = get_user_model()
 
