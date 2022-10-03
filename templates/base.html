@@ -188,7 +188,7 @@
 		<footer>
 			<div class = "container">
 				<p>
-					Copyright ©2021 All rights reserved 
+					Copyright &copy;<span id="year"></span> All rights reserved 
 					| This template was cloned with &hearts; by
 					<a href = "https://wa.me/2348137337777?text=Hi%20,Bovage%20">Bovage</a>
 				</p>
@@ -206,6 +206,8 @@
 			document.querySelector(".menu").addEventListener
 			("click", () => document.querySelector(".right-nav")
 			.classList.toggle("show"))
+
+			document.getElementById("year").textContent = new Date().getFullYear();
 		</script>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
