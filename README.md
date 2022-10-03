@@ -18,12 +18,16 @@ This is a church management website created with Django.
 - [x] Audio Sermon
 - [x] search
 - [x] customized admin dashboard
-- [x] integrating paystack for donations
+- [x] integrating [Paystack](https://paystack.com/) for donations
+- [x] Simple Recommender System
+- [x] Simple Ranking System
 
 # Database
 Postgresql
 
 # Technologies Used
 - AWS S3 for serving static files & file upload
-- Redis for Caching and Message Broker
+- Redis for Caching, Message Broker and Leader board
+
+# Video Demo
 
